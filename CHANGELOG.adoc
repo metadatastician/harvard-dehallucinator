@@ -1,0 +1,21 @@
+== Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on https://keepachangelog.com/en/1.1.0/[Keep a
+Changelog], and this project adheres to
+https://semver.org/spec/v2.0.0.html[Semantic Versioning].
+
+=== [Unreleased]
+
+==== Fixed
+
+* Restore the modular `just` recipes removed by the root-layout refactor, so
+  `just repo-init`, validation, assessment, container, Groove, and proof tasks
+  are available again.
+* Require lowercase hyphenated repository slugs at initialization and verify
+  that both Guix package definitions receive the rendered slug and project URL.
+* Keep template validation aligned with authority documents moved under
+  `docs/`, and repair the cross-platform `cloak`/`uncloak` recipe syntax.
+* Restore the tracked-file language-ban gate with regression fixtures proving
+  that supported Zig passes while prohibited V-language remnants fail.
