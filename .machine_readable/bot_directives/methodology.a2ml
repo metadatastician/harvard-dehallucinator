@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MPL-2.0
-# Copyright (c) {{CURRENT_YEAR}} {{AUTHOR}} ({{OWNER}}) <{{AUTHOR_EMAIL}}>
+# Copyright (c) 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
 #
 # methodology.a2ml — AI agent methodology configuration
 # Declares how agents should approach work in this repository.
@@ -9,7 +9,7 @@
 
 [metadata]
 version = "1.0.0"
-last-updated = "{{CURRENT_DATE}}"
+last-updated = "2026-08-25"
 spec = "https://github.com/hyperpolymath/standards/blob/main/agentic-a2ml/docs/ADR-002-methodology-layer.adoc"
 
 # ============================================================================
@@ -55,7 +55,7 @@ perfective = 10   # % for SPDX headers, doc updates, formatting, style
 # Customise this per project — the template default is generic.
 
 [methodology.unique-strength]
-description = "{{PROJECT_UNIQUE_STRENGTH}}"
+description = "UNASSIGNED"
 deepen-not-broaden = true
 
 # ============================================================================
@@ -102,14 +102,14 @@ constraints = [
 
 [methodology.state-validation]
 # A regex, not a literal list. The list form named the exact strings it was
-# meant to catch ("{{PROJECT}}"), so `just repo-init` substituted the detector along
+# meant to catch ("HARVARD_DEHALLUCINATOR"), so `just repo-init` substituted the detector along
 # with everything else and shipped reject-if-contains = ["MY_PROJECT", ...] —
 # a guard against unfilled tokens that had been eaten by the filling. The
 # escaped pattern below contains no token for init to match, and covers every
 # upper-snake token rather than the three anyone remembered to enumerate.
 # Enforced by scripts/check-no-placeholders.sh.
 reject-if-matches = ["\\{\\{[A-Z][A-Z0-9_]*\\}\\}"]
-reject-if-contains = ["rsr-template-repo"]
+reject-if-contains = ["harvard-dehallucinator"]
 reject-if-project-name-mismatch = true
 staleness-threshold-days = 90
 fallback-files = ["TODO.md", "TODO.adoc", "ROADMAP.adoc", "README.adoc"]

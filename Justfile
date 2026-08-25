@@ -19,9 +19,9 @@ set positional-arguments := true
 import? "build/contractile.just"
 
 # Project metadata — customize these
-project := "rsr-template-repo"
+project := "harvard-dehallucinator"
 OWNER := "hyperpolymath"
-REPO := "rsr-template-repo"
+REPO := "harvard-dehallucinator"
 version := "0.1.0"
 tier := "infrastructure"  # 1 | 2 | infrastructure
 
@@ -48,7 +48,7 @@ help recipe="":
 
 # Show this project's info
 info:
-    @echo "Project: {{project}}"
+    @echo "Project: harvard_dehallucinator"
     @echo "Version: {{version}}"
     @echo "RSR Tier: {{tier}}"
     @echo "Recipes: $(just --summary | wc -w)"
@@ -87,7 +87,7 @@ import? "build/just/assess.just"
 
 # Build the project (debug mode)
 build *args:
-    @echo "Building {{project}} (debug)..."
+    @echo "Building harvard_dehallucinator (debug)..."
     # TODO: Replace with your build command
     # Examples:
     #   cargo build {{args}}                    # Rust
@@ -98,7 +98,7 @@ build *args:
 
 # Build in release mode with optimizations
 build-release *args:
-    @echo "Building {{project}} (release)..."
+    @echo "Building harvard_dehallucinator (release)..."
     # TODO: Replace with your release build command
     # Examples:
     #   cargo build --release {{args}}
@@ -137,20 +137,15 @@ clean-all: clean
 # Run all tests
 test *args:
     #!/usr/bin/env bash
-    # A check that cannot fail is not a check. This recipe MUST be replaced at
-    # mint with the project's real test command; until then it fails loudly
-    # rather than printing "Tests passed!" over an empty run.
+    # The guarantee regression suite. Verifies that `completed`/`status` are
+    # only ever derived from engine/verify_register.sh, and that no
+    # caller-supplied argument can reach the string COMPLETE.
     #
-    # Replace this whole body with one of:
-    #   cargo test --workspace {{args}}
-    #   mix test {{args}}
-    #   zig build test {{args}}
-    #   deno test {{args}}
-    echo "FAIL: \`just test\` has not been wired to a real test command yet." >&2
-    echo "      Edit the 'test' recipe in the Justfile before relying on this gate." >&2
-    exit 1
+    # Runs entirely on a scratch copy via $HARVARD_ROOT, so it never touches
+    # this repo's own state/state.txt. Requires GHC (runghc) — it fails loudly
+    # rather than skipping, because a check that cannot fail is not a check.
+    exec bash tests/guarantee_test.sh {{args}}
 
-# Run tests with verbose output
 test-verbose:
     @echo "Running tests (verbose)..."
     # TODO: Replace with verbose test command
@@ -283,7 +278,7 @@ run-verbose *args: build
 
 # Install to user path
 install: build-release
-    @echo "Installing {{project}}..."
+    @echo "Installing harvard_dehallucinator..."
     # TODO: Replace with your install command
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -354,7 +349,7 @@ cookbook:
     #!/usr/bin/env bash
     mkdir -p docs
     OUTPUT="docs/just-cookbook.adoc"
-    echo "= {{project}} Justfile Cookbook" > "$OUTPUT"
+    echo "= harvard_dehallucinator Justfile Cookbook" > "$OUTPUT"
     echo ":toc: left" >> "$OUTPUT"
     echo ":toclevels: 3" >> "$OUTPUT"
     echo "" >> "$OUTPUT"
@@ -380,10 +375,10 @@ cookbook:
 man:
     #!/usr/bin/env bash
     mkdir -p docs/man
-    cat > docs/man/{{project}}.1 << EOF
-    .TH {{project}} 1 "$(date +%Y-%m-%d)" "{{version}}" "{{project}} Manual"
+    cat > docs/man/harvard_dehallucinator.1 << EOF
+    .TH harvard_dehallucinator 1 "$(date +%Y-%m-%d)" "{{version}}" "harvard_dehallucinator Manual"
     .SH NAME
-    {{project}} \- RSR-compliant project
+    harvard_dehallucinator \- RSR-compliant project
     .SH SYNOPSIS
     .B just
     [recipe] [args...]
@@ -392,7 +387,7 @@ man:
     .SH AUTHOR
     $(git config user.name 2>/dev/null || echo "Author") <$(git config user.email 2>/dev/null || echo "email")>
     EOF
-    echo "Generated: docs/man/{{project}}.1"
+    echo "Generated: docs/man/harvard_dehallucinator.1"
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # CI & AUTOMATION
@@ -567,7 +562,7 @@ assail:
 
 # Self-diagnostic — checks dependencies, permissions, paths
 doctor:
-    @echo "Running diagnostics for rsr-template-repo..."
+    @echo "Running diagnostics for harvard-dehallucinator..."
     @echo "Checking required tools..."
     @command -v just >/dev/null 2>&1 && echo "  [OK] just" || echo "  [FAIL] just not found"
     @command -v git >/dev/null 2>&1 && echo "  [OK] git" || echo "  [FAIL] git not found"
@@ -577,7 +572,7 @@ doctor:
 
 # Guided tour of key features
 tour:
-    @echo "=== rsr-template-repo Tour ==="
+    @echo "=== harvard-dehallucinator Tour ==="
     @echo ""
     @echo "1. Project structure:"
     @ls -la
@@ -592,12 +587,12 @@ tour:
 
 # Open feedback channel with diagnostic context
 help-me:
-    @echo "=== rsr-template-repo Help ==="
+    @echo "=== harvard-dehallucinator Help ==="
     @echo "Platform: $(uname -s) $(uname -m)"
     @echo "Shell: $SHELL"
     @echo ""
     @echo "To report an issue:"
-    @echo "  https://github.com/hyperpolymath/rsr-template-repo/issues/new"
+    @echo "  https://github.com/hyperpolymath/harvard-dehallucinator/issues/new"
     @echo ""
     @echo "Include the output of 'just doctor' in your report."
 

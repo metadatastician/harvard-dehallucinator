@@ -1,13 +1,13 @@
 # SPDX-License-Identifier: MPL-2.0
 # ECOSYSTEM.a2ml — Ecosystem position (META-TEMPLATE)
 #
-# This is the ECOSYSTEM file for rsr-template-repo itself. It records the
+# This is the ECOSYSTEM file for harvard-dehallucinator itself. It records the
 # TEMPLATE's own position in the estate. When consumed by a new project,
 # replace these fields with the target project's ecosystem position and
 # related projects (see the NOTE FOR CONSUMERS at the bottom).
 
 [metadata]
-project = "rsr-template-repo"
+project = "harvard-dehallucinator"
 ecosystem = "hyperpolymath"
 
 [position]

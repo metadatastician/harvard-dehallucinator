@@ -55,12 +55,12 @@ Deny: **Nix, Node/npm, , Python, Go, AGPL**. (Guix, not Nix.)
 
 ---
 
-# This repo: `rsr-template-repo`  ·  clade `rm-rsr-template-repo`
+# This repo: `harvard-dehallucinator`  ·  clade `rm-harvard-dehallucinator`
 
-- **Identity** — uuid `a5ea1382-a34c-5334-8a46-a2ebe904c810`; clade `rm` (secondary `gv`); born 2026-03-16; forge `hyperpolymath/rsr-template-repo`.
+- **Identity** — uuid `a5ea1382-a34c-5334-8a46-a2ebe904c810`; clade `rm` (secondary `gv`); born 2026-03-16; forge `hyperpolymath/harvard-dehallucinator`.
 - **IS** — Canonical RSR-compliant repository template: scaffolding (CI/CD, AI manifests, ABI/FFI standards, container ecosystem, governance) that new hyperpolymath projects are instantiated from.
 - **IS-NOT** — a project in its own right · Scaffoldia (the full-featured repo designer) · standards (the canon source this template operationalises)
-- **Where it sits** — pipeline position **foundation**; chain `standards → rsr-template-repo → (every estate repo)`; coordination = `standards`.
+- **Where it sits** — pipeline position **foundation**; chain `standards → harvard-dehallucinator → (every estate repo)`; coordination = `standards`.
 - **Constraints here** (AGENTIC) — fail-closed; evidence-per-step; no-silent-skip; rerun-after-fix; release-claim-requires-hard-pass. Never: banned langs (above), secrets, state files in repo root, AGPL. Details: `.machine_readable/bot_directives/{methodology,coverage,debt}.a2ml`.
 - **Golden path** (ANCHOR) — `just test && just quality` → Core tests pass; Quality gates pass; No unresolved critical security findings.
 - **State** — phase maintenance; maturity production; 95% complete; status active.

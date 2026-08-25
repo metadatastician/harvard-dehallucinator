@@ -5,11 +5,11 @@
 #
 [metadata]
 version = "0.1.0"
-last-updated = "{{CURRENT_DATE}}"
+last-updated = "2026-08-25"
 
 [project]
-name = "[YOUR-REPO-NAME]"
-purpose = "{{PROJECT_DESCRIPTION}}"
+name = "Harvard Dehallucinator"
+purpose = "An external state-management orchestration framework for LLM agents: task state lives outside the context window, and only an independent verifier may write COMPLETE."
 
 [ai-allocation]
 agents = [

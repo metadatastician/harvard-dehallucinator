@@ -1,3 +1,4 @@
+-- SPDX-License-Identifier: MPL-2.0
 -- The Harvard Dehallucinator state engine.
 --
 -- THE GUARANTEE: `completed` and `status` are only ever DERIVED from

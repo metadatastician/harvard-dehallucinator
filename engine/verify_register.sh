@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MPL-2.0
 # Counts surviving ReScript artefacts under a target tree.
 #
 # This is the ONLY authority on progress. Engine.hs derives `remaining` from

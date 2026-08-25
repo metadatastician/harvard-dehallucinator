@@ -209,7 +209,7 @@ for guix_file in guix.scm build/guix.scm; do
         log_error "$guix_file does not contain the rendered project home page"
         exit 1
     fi
-    if grep -q 'rsr-template-repo' "$TEST_REPO_PATH/$guix_file"; then
+    if grep -q 'harvard-dehallucinator' "$TEST_REPO_PATH/$guix_file"; then
         log_error "$guix_file still contains the template repository identity"
         exit 1
     fi
