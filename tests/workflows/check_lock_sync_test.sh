@@ -6,6 +6,7 @@ set -uo pipefail
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 CHECKER="$REPO_ROOT/scripts/check-lock-sync.sh"
 GATE="$REPO_ROOT/.github/workflows/lock-sync-gate.yml"
+LOCK="$REPO_ROOT/.github/workflows/actions.lock"
 FIXTURE_ROOT="$(mktemp -d)"
 trap 'rm -rf "$FIXTURE_ROOT"' EXIT
 
@@ -127,6 +128,7 @@ write_single_ref_lock build.yml 'actions/checkout@v1' 'ACTIONS/CHECKOUT@v1'
 run_checker
 assert_status 'accepts synchronized refs, duplicate uses, comments, quotes, subpaths, and repository case differences' 0
 assert_output_contains 'reports a synchronized lockfile' 'actions.lock is in sync and transitively closed'
+assert_output_contains 'reports complete workflow-file coverage' 'every workflow file has a lockfile key (zero-uses: workflows included)'
 
 new_fixture
 write_workflow local.yaml \
@@ -189,6 +191,7 @@ run_checker
 assert_status 'rejects an un-onboarded job-level reusable workflow' 1
 assert_output_contains 'distinguishes an absent workflow entry from a missing ref' 'not onboarded: no lockfile entry for this path'
 assert_output_contains 'normalizes reusable workflow subpaths' 'unlocked refs: owner/repository@main'
+assert_output_contains 'also reports the missing reusable-workflow file as unlisted' 'UNLISTED WORKFLOWS'
 
 new_fixture
 write_external_workflow build.yml 'actions/checkout@V1'
@@ -277,6 +280,59 @@ write_lock \
 run_checker
 assert_status 'accepts a transitively closed dependency graph' 0
 
+echo '== clause 4: every workflow file has a lock key =='
+
+new_fixture
+write_workflow unlisted.yml \
+    'name: No external actions' \
+    'on: push' \
+    'jobs:' \
+    '  check:' \
+    '    runs-on: ubuntu-latest' \
+    '    steps:' \
+    '      - run: echo done'
+write_lock \
+    "version: 'v0.0.2'" \
+    'workflows:' \
+    'dependencies:'
+run_checker
+assert_status 'rejects an unlisted workflow with no uses entries' 1
+assert_output_contains 'labels missing workflow keys as a coverage failure' 'FAIL actions.lock: UNLISTED WORKFLOWS'
+assert_output_contains 'reports the number of unlisted workflow files' '1 workflow file(s) have no key in the lockfile'
+assert_output_contains 'names the unlisted zero-uses workflow' '.github/workflows/unlisted.yml'
+assert_output_contains 'explains the empty-list remediation' "'.github/workflows/x.yml': []"
+
+new_fixture
+write_workflow alpha.yml \
+    'name: First unlisted workflow' \
+    'on: push'
+write_workflow beta.yaml \
+    'name: Second unlisted workflow' \
+    'on: pull_request'
+write_workflow listed.yml \
+    'name: Listed workflow' \
+    'on: workflow_dispatch'
+write_lock \
+    "version: 'v0.0.2'" \
+    'workflows:' \
+    "    '.github/workflows/listed.yml': []" \
+    'dependencies:'
+run_checker
+assert_status 'rejects every unlisted workflow across yml and yaml extensions' 1
+assert_output_contains 'aggregates multiple missing workflow keys' '2 workflow file(s) have no key in the lockfile'
+assert_output_contains 'names the missing yml workflow' '.github/workflows/alpha.yml'
+assert_output_contains 'names the missing yaml workflow' '.github/workflows/beta.yaml'
+
+write_lock \
+    "version: 'v0.0.2'" \
+    'workflows:' \
+    "    '.github/workflows/alpha.yml': []" \
+    "    '.github/workflows/beta.yaml': []" \
+    "    '.github/workflows/listed.yml': []" \
+    'dependencies:'
+run_checker
+assert_status 'accepts zero-uses workflows once every empty-list key is present' 0
+
 echo '== input and parser boundaries =='
 
 new_fixture
@@ -324,12 +380,14 @@ assert_output_contains 'explains the GNU awk prerequisite' 'no awk supporting 3-
 echo '== checked-in gate contract =='
 
 assert_file_matches 'gate runs for pull requests' '^  pull_request:$' "$GATE"
+assert_file_matches 'gate supports manual workflow dispatch' '^  workflow_dispatch:$' "$GATE"
 assert_file_matches 'gate runs for pushes to main' '^    branches: \[main\]$' "$GATE"
 assert_file_matches 'gate uses read-only repository contents permission' '^  contents: read$' "$GATE"
 assert_file_not_matches 'gate has no path filter that can suppress a required check' '^[[:space:]]+paths:' "$GATE"
 assert_file_not_matches 'gate carries no action or reusable-workflow uses entry' '^[[:space:]]*-?[[:space:]]*uses:' "$GATE"
 assert_file_matches 'gate checks the pull-request head revision' 'SHA: \$\{\{ github\.event\.pull_request\.head\.sha \|\| github\.sha \}\}' "$GATE"
 assert_file_matches 'gate executes the lock-sync checker' '^[[:space:]]*\./scripts/check-lock-sync\.sh$' "$GATE"
+assert_file_matches 'lockfile lists the zero-uses lock-sync gate' "^    '.github/workflows/lock-sync-gate\\.yml': \[\]$" "$LOCK"
 
 echo '== current pull-request fixtures =='
 
