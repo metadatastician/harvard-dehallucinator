@@ -154,7 +154,9 @@ FNR == 1 { wf = FILENAME }
     raw = m[1]
     gsub(/^["']|["']$/, "", raw)
     gsub(/[[:space:]]+$/, "", raw)
-    if (raw ~ /^\$\//) { dollar[wf] = dollar[wf] " " raw; next }   # known corruption
+    # Self-repository references may name a path without a ref. Only the bare
+    # repository root and attempts to append a ref are invalid.
+    if (raw == "$/" || raw ~ /^\$\/.*@[^@]+$/) { dollar[wf] = dollar[wf] " " raw; next }
     n = norm(raw)
     if (n != "") { uses[wf, ck(n)] = 1; useslist[wf] = useslist[wf] " " n }
   }
@@ -170,7 +172,7 @@ END {
     key = ".github/workflows/" key          # the lockfile always uses this canonical path
 
     if (dollar[wf] != "") {
-      printf "FAIL %s\n     invalid local-action rewrite (uses: $/...):%s\n", key, dollar[wf]
+      printf "FAIL %s\n     invalid self-repository reference (uses: $/ or $/<path>@<ref>):%s\n", key, dollar[wf]
       bad = 1
     }
 
