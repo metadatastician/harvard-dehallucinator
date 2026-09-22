@@ -68,6 +68,8 @@ session/                   # dispatch.sh, custom-checks.k9, local-hooks.sh
 
 # Source / test / artifact trees (project-specific but conventional)
 src/
+engine/                    # Haskell verification engine; invoked at this path from the repository root
+state/                     # durable state read and updated by engine/Engine.hs
 tests/
 benches/
 examples/
