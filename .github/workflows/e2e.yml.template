@@ -121,12 +121,12 @@ jobs:
 #   timeout-minutes: 15
 #   steps:
 #     - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5  # v4
-#     - uses: denoland/setup-@667a34cdef165d8d2b2e98dde39547c9daac7282  # v2.0.4
+#     - uses: denoland/setup-deno@667a34cdef165d8d2b2e98dde39547c9daac7282  # v2.0.4
 #       with:
-#         -version: v2.x
-#     - run:  install --node-modules-dir=auto
-#     - run:  task res:build  #  compile
-#     - run:  test tests/e2e/
+#         deno-version: v2.x
+#     - run: deno install --node-modules-dir=auto
+#     - run: deno task res:build  # ReScript compile
+#     - run: deno test tests/e2e/
 
 ## === PLAYWRIGHT (Browser E2E) ===
 # e2e-playwright:
@@ -139,10 +139,10 @@ jobs:
 #       project: [chromium-1080p, firefox-1080p, webkit-1080p]
 #   steps:
 #     - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5  # v4
-#     - uses: denoland/setup-@667a34cdef165d8d2b2e98dde39547c9daac7282  # v2.0.4
+#     - uses: denoland/setup-deno@667a34cdef165d8d2b2e98dde39547c9daac7282  # v2.0.4
 #       with:
-#         -version: v2.x
-#     - run:  install --node-modules-dir=auto
+#         deno-version: v2.x
+#     - run: deno install --node-modules-dir=auto
 #     - run: npx playwright install --with-deps
 #     - run: npx playwright test --project=${{ matrix.project }}
 #     - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # v4

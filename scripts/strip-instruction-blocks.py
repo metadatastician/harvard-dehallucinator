@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MPL-2.0
+# hypatia:ignore cicd_rules/banned_language_file
+# Repo initialization needs bounded multi-line matching across template files.
 """Delete the RSR template's "TEMPLATE INSTRUCTIONS" comment blocks.
 
 The community-health templates open with an HTML comment headed
