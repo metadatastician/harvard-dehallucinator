@@ -18,7 +18,7 @@ workflows:
     '.github/workflows/estate-rules.yml':
         - 'actions/checkout@v7.0.1'
     '.github/workflows/governance.yml':
-        - 'hyperpolymath/standards@bd0df9ead7faf0cdfe0e13e7966d91e28d0101d4'
+        - 'hyperpolymath/standards@7d51f30f992b51fe2b33119761901c594e266e82'
     '.github/workflows/guix-policy.yml':
         - 'actions/checkout@v7.0.1'
     '.github/workflows/hypatia-scan.yml':
@@ -165,6 +165,11 @@ dependencies:
         commit: 'sha1-6c977a6ca4077a0ceb28ffbe03f59d46e9ac8772'
         owner_id: 1940490
         repo_id: 260749683
+    'editorconfig-checker/action-editorconfig-checker@51f63319f592f97930c73d9c46184d20bd206393':
+        ref: 'v3.0.0'
+        commit: 'sha1-51f63319f592f97930c73d9c46184d20bd206393'
+        owner_id: 26415196
+        repo_id: 297874902
     'editorconfig-checker/action-editorconfig-checker@840e866d93b8e032123c23bac69dece044d4d84c':
         ref: '840e866d93b8e032123c23bac69dece044d4d84c'
         commit: 'sha1-840e866d93b8e032123c23bac69dece044d4d84c'
@@ -205,6 +210,16 @@ dependencies:
         commit: 'sha1-89f3c2702f4f650a92aa7411502f38da06abd562'
         owner_id: 6759885
         repo_id: 1275650185
+    'hyperpolymath/standards@7d51f30f992b51fe2b33119761901c594e266e82':
+        ref: '7d51f30f992b51fe2b33119761901c594e266e82'
+        commit: 'sha1-7d51f30f992b51fe2b33119761901c594e266e82'
+        owner_id: 6759885
+        repo_id: 1116521501
+        uses:
+            - 'actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9'
+            - 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1'
+            - 'editorconfig-checker/action-editorconfig-checker@51f63319f592f97930c73d9c46184d20bd206393'
+            - 'erlef/setup-beam@54075bcc5e249e4758d363f27d099f55d843f124'
     'hyperpolymath/standards@bd0df9ead7faf0cdfe0e13e7966d91e28d0101d4':
         ref: 'bd0df9ead7faf0cdfe0e13e7966d91e28d0101d4'
         commit: 'sha1-bd0df9ead7faf0cdfe0e13e7966d91e28d0101d4'
