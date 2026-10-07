@@ -1,95 +1,228 @@
 // SPDX-License-Identifier: CC-BY-SA-4.0
-// SPDX-FileCopyrightText: 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
-= AFFIRMATION — Harvard Dehallucinator, as of <UTC timestamp>
-:toc: macro
-:toclevels: 2
+= AFFIRMATION — Harvard Dehallucinator, as of 2026-10-07
+Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+:status: DRAFT — agent-authored, NOT affirmed by the owner
+:toc: preamble
+:toc-title: Contents
+:icons: font
+:doctype: article
 
-_the No-Bullshit file: what we affirm was true and checkable at this moment._
-
-[NOTE]
+[WARNING]
 ====
-*This file is a template.* Replace the `{{…}}` placeholders and the `<…>` anchor
-fields, then re-run your project's own checks in the same session before signing.
-
-An *affirmation* is a solemn declaration of the truth of a statement, made by
-someone who _declines to swear an oath_ — our truth-as-best-believed at a stamped
-instant, binding on our honesty, not a claim of infallibility. It is the third of
-the README / EXPLAINME / AFFIRMATION trio:
-
-[cols="1,3,2",options="header"]
-|===
-| File | Answers | Tense
-| `README.adoc` | _Where is this going, and why?_ — steering, intent, vision | future / aspirational
-| `EXPLAINME.adoc` | _How is it built, and what's the evidence?_ — engineering | descriptive / mechanism
-| *`AFFIRMATION.adoc`* (this file) | _What can we honestly affirm was *true and checkable* at a stamped moment?_ | a frozen instant, falsifiable
-|===
+*DRAFT.* This file is a draft until the owner lands it with a signed commit
+(`git commit -S`) whose parent is the anchor SHA below. Until then, read every
+claim in it as unaffirmed.
 ====
-
-toc::[]
 
 == What this is, and how it works
 
-*What it is.* A short, dated, signed snapshot of what hyperpolymath can honestly and
-verifiably claim about *Harvard Dehallucinator* at one exact commit. Nothing here is
-marketing and nothing is a promise about the future — those live in the README.
-This file is the receipt.
+Harvard Dehallucinator keeps an LLM agent's task state outside its context
+window. Its one piece of project-specific code is a state engine,
+`engine/Engine.hs` (Haskell, run with `runghc`), and a verifier,
+`engine/verify_register.sh`. The engine's guarantee is that `COMPLETE` is only
+ever derived from the verifier's measured count, never from an argument the
+caller supplies. Everything else in the tree is RSR template scaffolding. This
+file reports what the repo's own checks printed against one commit on
+2026-10-07. It supersedes the 2026-08-25 file, which was an unfilled template
+and is now at `docs/affirmations/AFFIRMATION-2026-08-25.adoc`.
 
-*How it stays trustworthy.* Three moving parts:
+== The epistemic contract
 
-. *Ground truth, not memory.* Every claim below must be produced by _running the
-  project's own checks_ in the session that writes this file (build, tests,
-  typecheck, `just audit`). Where a status doc, the `Justfile`, or memory says
-  otherwise, the live run wins and the contradiction is flagged here.
-. *A frozen anchor.* The file names the exact commit SHA, branch, UTC timestamp,
-  and toolchain (see <<verifiable-anchor>>), so "true" always means "true _at
-  this point_". Move the SHA and this file is a draft until it is re-run.
-. *A real signature.* It is landed by a *signed git commit*; that signature over
-  this content at the anchored SHA is what makes the affirmation tamper-evident
-  and attributable — not the prose alone.
+You may conclude that each command below, run at the anchor commit with the
+listed toolchain, produced the exit code and counts stated. You may not
+conclude that the engine is correct in general, that the guarantee holds
+against an agent that can edit `state/state.txt` or the verifier directly, or
+anything about CI or other commits. No CI badge or CI run is cited as evidence
+here. Silence is not a claim.
 
-*We are fallible.* This is our best honest belief, not a proof of its own
-correctness. Treat it as a falsifiable claim, not gospel.
-
-== The epistemic contract (read this before you trust _or_ attack)
-
-This document records hyperpolymath's *best belief* at the timestamp below. It is
-*not a guarantee of correctness.* The only guarantee is *no intentional
-overclaim*: where something is proven we say "proven"; where it is a documented
-trust boundary, an experiment, or an unwired module, we say so; where a claim is
-the README's aspiration rather than a checked result, we say so. An honest claim
-that later turns out false is an *error to be fixed* — not a lie.
-
-*Standing invitation to refute.* You are invited to bulldoze any claim in this
-file. Bring a counter-example, a failing run, or a contradicting source.
-
-== What we affirm (fill in — delete the examples)
-
-[cols="2,1,3",options="header"]
-|===
-| Claim | Status | Evidence (command / `file:line`)
-| _e.g. The library builds clean_ | affirmed | `just build` at the anchor SHA
-| _e.g. The ABI seam typechecks_ | affirmed | `idris2 --typecheck abi.ipkg`
-| _e.g. Feature X is complete_ | aspiration | README §… (not yet checked)
-|===
-
-== What we do NOT claim
-
-* List the known gaps, trust boundaries, postulates, unwired modules, and stale
-  docs here. Silence is not affirmation — name what you have *not* verified.
-
-[#verifiable-anchor]
 == Verifiable anchor
 
-[cols="1,3"]
+[cols="1,3", options="header"]
 |===
-| Project | Harvard Dehallucinator
-| Repository | https://github.com/hyperpolymath/harvard-dehallucinator
-| Commit (SHA) | <full commit SHA at time of signing>
-| Branch | main
-| Timestamp (UTC) | <ISO-8601 UTC timestamp>
-| Toolchain | <compilers / provers / versions used to ground the claims>
-| Affirmed by | Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+| Field | Value
+
+| Repo
+| `metadatastician/harvard-dehallucinator`
+
+| Branch
+| `main` (measured at `origin/main`, checked out as local branch
+  `docs/affirmation-2026-10-07`)
+
+| Commit (HEAD)
+| `6072bc3182956cc2de0c6198c6dc90df670aca4e`
+
+| Permalink
+| https://github.com/metadatastician/harvard-dehallucinator/tree/6072bc3182956cc2de0c6198c6dc90df670aca4e
+
+| Verified (UTC)
+| 2026-10-07T11:23:01Z to 2026-10-07T11:26:24Z
+
+| Working-tree delta at verification
+| `clean`: `git status --porcelain` printed 0 lines before and after the runs.
+  Gitignored build products of the runs were present (`build/ttc/`,
+  `verification/proofs/idris2/build/`, Coq `.vo`/`.glob` files); they do not
+  affect the results.
+
+| Toolchain
+| GHC 9.6.6 (`runghc`); Idris 2 0.7.0; Coq 8.20.1; Lean 4.34.1; Agda
+  2.7.0.1; just 1.56.0; bash 5.2
 |===
 
-_Landed by a signed git commit. Verify with `git log --show-signature` that the
-anchor SHA above matches the commit that introduced this affirmation._
+[CAUTION]
+====
+If you are reading this at a later commit, the claims may have drifted. Re-run
+the reproduction steps and write a fresh affirmation; do not trust a stale one.
+====
+
+== Companion documents and repo metadata (cross-check)
+
+[cols="1,3", options="header"]
+|===
+| Document | Relationship to this file
+
+| `README.adoc`
+| *Still the template README.* It carries the "This file is a template"
+  admonition and 3 lines with `{{` placeholders, below a one-line project
+  description. Nothing in it beyond that line describes this project.
+
+| `docs/affirmations/AFFIRMATION-2026-08-25.adoc`
+| The previous file. It was the unfilled template: no anchor SHA, no
+  timestamp, example claims only. It made no claim that could be re-checked.
+
+| `tests/guarantee_test.sh`
+| The suite behind `just test`, and the evidence for the guarantee.
+|===
+
+== The honest state (one breath)
+
+The engine's guarantee suite passes 19 of 19, and a planted defect makes it
+fail; the 3-module Idris2 ABI builds. The repo's shape gate and aspect suite
+are red, and the README is still the template's.
+
+=== What is solid (and how we checked)
+
+[cols="3,1,3", options="header"]
+|===
+| Command | Exit | Result
+
+| `just test` (runs `bash tests/guarantee_test.sh`)
+| 0
+| PASS=19 FAIL=0, across 5 groups: verifier (2), baseline (2), the guarantee
+  (7), circuit breaker (5), robustness (3)
+
+| Planted defect: in a scratch copy of `engine/` and the suite, change
+  `if remaining == 0 then statusComplete` to `if remaining <= 3`, then run
+  the copied suite
+| 1
+| PASS=16 FAIL=3. It caught the defect: "non-zero target cannot write
+  COMPLETE", "status unchanged by the attempt", "regresses out of COMPLETE".
+  The repo copy was not modified.
+
+| `idris2 --build abi.ipkg`
+| 0
+| 3/3 modules built (`Abi.Types`, `Abi.Layout`, `Abi.Foreign`), with 2
+  warnings about implicitly binding `n`
+
+| `grep -nE 'believe_me\|assert_total\|postulate\|%default'` over
+  `src/interface/Abi/*.idr`
+| -
+| 0 escape hatches; all 3 modules declare `%default total`. Positive
+  control: the line `believe_me` piped through the same pattern counted 1.
+
+| `bash scripts/check-proofs.sh coq`
+| 0
+| "RESULT: PASS -- gated modules compile". The one module,
+  `TypeSafety.v`, is the template's example proof.
+|===
+
+=== The honest nuance you must not lose
+
+* *The guarantee is about the engine's interface.* The suite shows that no
+  command-line argument can produce `COMPLETE`. It does not show that an agent
+  with write access to `state/state.txt` or to `engine/verify_register.sh`
+  cannot forge it.
+* *The ABI and the proofs are template material.* `src/interface/Abi/` and
+  `verification/proofs/` came from `rsr-template-repo`, and the Coq file says
+  "Replace with your project's type system proofs". A green build of them is
+  not evidence about this project.
+* *The Lean toolchain differs from its pin.* The run used Lean 4.34.1, while
+  `verification/proofs/lean4/lean-toolchain` pins `v4.15.0`.
+
+=== Known-incomplete but honestly fenced
+
+* `just build`, `just e2e`, `just aspect`, `just bench` and `just readiness`
+  are template stubs that only `echo`. Nothing is claimed for them, and they
+  were not used as evidence.
+
+=== Outstanding / weak / refuted (no spin)
+
+* *Shape gate red.* `just validate` exited 1 at its first check:
+  "MISSING: .editorconfig", so `validate-rsr` failed and its later recipes
+  did not run. The same check also requires `0-AI-MANIFEST.a2ml`, a retired
+  format; the tree still tracks 123 `.a2ml` files.
+* *Aspect suite red.* `bash tests/aspect_tests.sh` exited 1 with PASS=2,
+  FAIL=1. The 4 "dangerous proof pattern" hits are all text that names the
+  banned words (`verification/proofs/README.adoc` lines 48-50 and a comment
+  in `TypeSafety.v` saying "NO Admitted allowed"). They look like false
+  positives, but the gate is red.
+* *Proof manifests out of date.* `bash scripts/check-proofs.sh idris2` and
+  `... lean4` each exited 1 because a module marked quarantined
+  (`Types.idr`, `ApiTypes.lean`) now compiles: an unexpected pass, not a
+  failure. `... agda` exited 1 for an environmental reason: this machine's
+  `~/.agda/libraries` points at library files under another session's
+  deleted scratch directory. Nothing about Agda is claimed.
+* *The e2e suite checks nothing.* `bash tests/e2e.sh` exited 0 with PASS=1,
+  but the one "pass" printed "Self-skipping: archetypes/ not found".
+* *Licence directory holds AGPL.* `LICENSES/` contains
+  `AGPL-3.0-or-later.txt` alongside `CC-BY-SA-4.0.txt` and `MPL-2.0.txt`.
+  No tracked file declares AGPL: `git grep` finds 293 MPL-2.0 and 150
+  CC-BY-SA-4.0 SPDX lines and no others. This file changes no licence; the
+  owner decides.
+* *Stale repo owner.* `git grep -c hyperpolymath/harvard-dehallucinator`
+  finds 52 lines in 31 tracked files. No tracked file names
+  `metadatastician/harvard-dehallucinator`.
+* *Nothing refuted from the old file*, because it made no checkable claim.
+
+== Reproduce it yourself
+
+[source,bash]
+----
+git clone https://github.com/metadatastician/harvard-dehallucinator
+cd harvard-dehallucinator
+git checkout 6072bc3182956cc2de0c6198c6dc90df670aca4e
+just test
+# expect: PASS=19 FAIL=0 (needs runghc on PATH)
+idris2 --build abi.ipkg
+# expect: 3/3 modules built, exit 0
+bash scripts/check-proofs.sh coq
+# expect: RESULT: PASS
+just validate
+# expect: exit 1, MISSING: .editorconfig
+bash tests/aspect_tests.sh
+# expect: exit 1, PASS=2 FAIL=1
+----
+
+== One-line characterisation (quote this)
+
+At `6072bc31`, Harvard Dehallucinator's engine passes its 19-check guarantee
+suite and fails it when a defect is planted; the rest of the tree is
+unfinished template, its shape and aspect gates are red, and its README is
+still the template's.
+
+== Joint attestation
+
+Engineering party (AI)::
+  `claude-opus-5-5` (Anthropic), running in Claude Code. The checks were run
+  between 2026-10-07T11:23:01Z and 2026-10-07T11:26:24Z at the anchor commit.
+  The wording of this file is a faithful report of those runs and of nothing
+  else.
+
+Owner / maintainer::
+  Jonathan D.A. Jewell. The owner affirms by landing this file with a signed
+  commit whose parent is the anchor SHA:
++
+[source,bash]
+----
+git commit -S -s -m "docs: affirm state at 6072bc31"
+git log --show-signature -1
+----
